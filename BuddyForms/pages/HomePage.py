@@ -1,13 +1,14 @@
-from BuddyForms.utils.BasePage import BasePage
+from selenium.webdriver.common.by import By
+
+from BuddyForms.utils.Utils import Utils
 
 
-class HomePage(BasePage):
+class HomePage(Utils):
+    dashboard_title = By.CSS_SELECTOR, "#wpbody-content > div.wrap > h1"
+    wordpress_bar_site = By.CSS_SELECTOR, "#wp-admin-bar-site-name > a"
 
-    DASHBOARD = "//h1[contains(.,\"Dashboard\")]"
-    GREETINGS_USER = "#wp-admin-bar-my-account > a"
+    def verify_dashboard_title(self):
+        return Utils.wait_element_displayed_text(self, self.dashboard_title)
 
-    def verify_correct_landing_page(self):
-        return self._driver.find_element_by_xpath(HomePage.DASHBOARD).is_displayed()
-
-    def verify_correct_user_access(self):
-        return self._driver.find_element_by_css_selector(HomePage.GREETINGS_USER).text
+    def verify_landing_page(self):
+        return Utils.wait_element_displayed_text(self, self.wordpress_bar_site)

@@ -1,20 +1,18 @@
 import unittest
-from selenium import webdriver
 import time
-from selenium.webdriver.common.utils import Keys
-from selenium.webdriver.common.actions.key_actions import KeyActions
+from selenium import webdriver
+from BuddyForms.utils.Urls import Urls
 
 
 class TestTemplate(unittest.TestCase):
-    # APACHE AUTHENTICATION
-    APACHE_USERNAME = "qa"
-    APACHE_PASSWORD = "Q!W@E#R$T%"
 
     def setUp(self):
+        """ Modify the WebDriver location path if needed.
+        I'm looking for another option to avoid this """
         self.driver = webdriver.Chrome("C:/Users/Njota/PycharmProjects/Themekraft/chromedriver.exe")
         self.driver.maximize_window()
-        self.driver.get("https://buddyforms-premium.appscidentally.com/wp-admin")
-        time.sleep(10)
+        self.driver.get(Urls.wordpress_admin_page_apache_auth)
+        time.sleep(5)
 
     def tearDown(self):
         if self.driver is not None:
